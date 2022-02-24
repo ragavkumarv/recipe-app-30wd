@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { Link, Route, Switch } from "react-router-dom";
 import "./App.css";
 
@@ -36,37 +37,17 @@ function Welcome() {
     </div>
   );
 }
-
+// import { useEffect, useState } from "react";
 function RecipeList() {
   const message = "Awesome recipe list 🍗🍟";
-  const recipe = {
-    name: "Biryani",
-    picture:
-      "https://www.cubesnjuliennes.com/wp-content/uploads/2021/03/Best-Mutton-Biryani-Recipe.jpg",
-  };
+  const [recipeList, setRecipeList] = useState([]);
 
-  const recipeList = [
-    {
-      picture:
-        "https://www.cookingclassy.com/wp-content/uploads/2018/08/tandoori-chicken-11.jpg",
-      name: "Chicken tandoori",
-    },
-    {
-      picture:
-        "https://www.vegrecipesofindia.com/wp-content/uploads/2020/01/paneer-butter-masala-1.jpg",
-      name: "Panner butter masala",
-    },
-    {
-      picture:
-        "https://images.indulgexpress.com/uploads/user/imagelibrary/2019/8/1/original/Biryanifest.jpg",
-      name: "Briyani",
-    },
-    {
-      picture:
-        "https://static.toiimg.com/thumb/64696930.cms?width=1200&height=900",
-      name: "Parotta shawarma",
-    },
-  ];
+  // useEffect -> runs only once -> when component is mounted
+  useEffect(() => {
+    fetch("<Your api>/recipes")
+      .then((data) => data.json())
+      .then((recipes) => setRecipeList(recipes));
+  }, []);
 
   return (
     <div>
